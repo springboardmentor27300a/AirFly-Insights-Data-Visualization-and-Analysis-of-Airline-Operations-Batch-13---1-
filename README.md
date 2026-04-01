@@ -80,10 +80,10 @@ Certain routes are more delay-prone
 Peak hours contribute to higher delays
 
 How to Run the Project -
-Open the notebook in Google Colab
-Run all preprocessing steps
-Load cleaned dataset into Power BI
-Build dashboard using visuals
+Open the notebook in Google Colab,
+Run all preprocessing steps,
+Load cleaned dataset into Power BI,
+Build dashboard using visuals.
 
 Conclusion -
 This project demonstrates how data analysis and visualization can help understand airline performance and delays, enabling better decision-making.
