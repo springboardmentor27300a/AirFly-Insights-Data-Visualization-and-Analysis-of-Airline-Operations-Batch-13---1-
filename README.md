@@ -57,12 +57,12 @@ Seasonal comparison (Winter vs Non-Winter).
 Dashboard Creation (Milestone 4):
 Created an interactive Power BI dashboard including:
 
-🔹 KPI Metrics
+🔹 KPI Metrics:-
 Total Flights,
 Average Delay,
 Cancellation Rate,
 Total Airlines.
-🔹 Visualizations
+🔹 Visualizations:-
 Flights by Airline,
 Delay by Airline,
 Monthly Delay Trend,
@@ -70,7 +70,7 @@ Cancellation Trend,
 Top Airports,
 Route Delay Analysis,
 Delay by Hour.
-🔹 Filters
+🔹 Filters:-
 Airline,
 Month,
 Origin Airport,
