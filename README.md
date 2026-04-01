@@ -16,4 +16,4 @@ This project analyzes airline operations using Python and Power BI.
 - Airline dataset with ~5.8 million records
 
 ## Author:
-Dhanalakshmi S
+Satyam Modi
