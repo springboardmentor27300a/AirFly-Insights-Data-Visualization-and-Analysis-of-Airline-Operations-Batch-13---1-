@@ -51,7 +51,31 @@ The project resulted in an interactive dashboard that provides meaningful insigh
 - Dashboard Design
 - Data Visualization
 - Business Intelligence Reporting
+  
+## Challenges Faced
 
+- Large dataset handling caused performance issues
+- Power BI file size increased due to embedded data
+- Aggregation errors while calculating average delays
+- Upload limitations on GitHub for large files
+- Formatting and aligning dashboard visuals
+
+## Solutions Implemented
+
+- Cleaned dataset to remove unnecessary columns
+- Used average aggregation for delay metrics
+- Shared large files using Google Drive
+- Optimized dashboard layout for clarity
+- Added slicers for better interactivity
+
+## Future Enhancements
+
+- Add real-time airline data integration
+- Include predictive delay analysis
+- Improve dashboard with additional KPIs
+- Add geographical map visualization
+- Enhance UI with better icons and layout
+  
 ## Dashboard Preview
 https://drive.google.com/file/d/1hQ4lc_H_JUhuE2cHRt03mTnQvwh_aTnd/view?usp=sharing
 
