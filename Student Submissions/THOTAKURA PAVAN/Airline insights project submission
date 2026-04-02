@@ -1,1 +1,26 @@
+# Airline Delay Analysis Dashboard
 
+## Project Description
+This project analyzes airline delay performance using Microsoft Power BI.
+The dashboard provides insights into delays, cancellations, and busiest routes
+with interactive filters.
+
+## Dashboard Preview
+![Dashboard Screenshot](PASTE_IMAGE_LINK_HERE)
+
+## Power BI Dashboard File
+PASTE_PBIX_DRIVE_LINK_HERE
+
+## Dataset
+PASTE_DATASET_DRIVE_LINK_HERE
+
+## Features
+- KPI metrics (Total Flights, Avg Delay, Cancelled Flights)
+- Delay by Airline
+- Monthly Trend Analysis
+- Cancellation Reasons
+- Route Analysis
+- Interactive Slicers
+
+## Tool Used
+- Microsoft Power BI
