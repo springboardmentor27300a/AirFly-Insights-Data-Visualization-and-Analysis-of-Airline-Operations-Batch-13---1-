@@ -32,7 +32,7 @@ This project aims to analyze airline data to uncover patterns, identify ineffici
 - Seasonal trends impact both pricing and traffic volume  
 
 
-Recommendations
+ Recommendations
 - Optimize scheduling during peak delay hours  
 - Implement dynamic pricing strategies more effectively  
 - Focus on high-delay routes for operational improvements  
