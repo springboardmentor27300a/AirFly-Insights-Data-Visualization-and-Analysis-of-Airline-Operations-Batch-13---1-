@@ -1,0 +1,504 @@
+
+!pip install opendatasets
+
+import opendatasets as od
+od.download("https://www.kaggle.com/datasets/usdot/flight-delays/data?select=flights.csv")
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+flights=pd.read_csv("/content/flight-delays/flights.csv")
+
+flights
+
+flights.info()
+
+flights.isnull().sum()
+
+flights.describe()
+
+flights['DATE'] = pd.to_datetime(
+    dict(year=flights.YEAR, month=flights.MONTH, day=flights.DAY)
+)
+
+flights['DATE']
+
+flights.isnull().sum()
+
+flights['TAIL_NUMBER'].isnull().sum()
+
+flights['TAIL_NUMBER'].fillna('unknown',inplace=True)
+
+flights['TAIL_NUMBER'].isnull().sum()
+
+flights['DEPARTURE_TIME'].isnull().sum()
+
+flights.loc[flights['TAIL_NUMBER']=='unknown',
+['DEPARTURE_TIME']].isnull().sum()
+
+flights["DATE"] = pd.to_datetime(
+    dict(year=flights["YEAR"],
+         month=flights["MONTH"],
+         day=flights["DAY"])
+)
+
+flights['DATE']
+
+flights['DATE'].isnull().sum()
+
+flights['DEPARTURE_TIME'].isnull().sum()
+
+flights["SCHEDULED_DEPARTURE_TIME"] = pd.to_datetime(
+    flights["SCHEDULED_DEPARTURE"]
+    .fillna(0)              # handle NaN
+    .astype(int)            # remove .0
+    .astype(str)            # convert to string
+    .str.zfill(4),          # make 4-digit HHMM
+    format="%H%M",
+    errors="coerce"
+).dt.time
+
+flights['SCHEDULED_DEPARTURE_TIME']
+
+flights['SCHEDULED_DEPARTURE_TIME'].isnull().sum()
+
+flights['SCHEDULED_DEPARTURE_TIME'].value_counts()
+
+flights.loc[flights['TAIL_NUMBER']=='unknown',
+            ['DEPARTURE_TIME']].isnull().sum()
+
+flights.loc[flights['TAIL_NUMBER']=='unknown',
+            ['DEPARTURE_TIME']] = 0
+
+flights.loc[flights['TAIL_NUMBER']=='unknown',
+            ['DEPARTURE_TIME']] .isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1 ,
+            ['DEPARTURE_TIME']].isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1 ,
+            ['DEPARTURE_TIME']] = 0
+
+flights['DEPARTURE_TIME'].isnull().sum()
+
+flights.loc[flights['DEPARTURE_TIME']== 0 ,
+            ['DEPARTURE_DELAY']].isnull().sum()
+
+flights["DEPARTURE_DELAY_FORMATTED"] = pd.to_timedelta(
+    flights["DEPARTURE_DELAY"], unit="m"
+)
+
+flights["DEP_DELAY_FORMATTED"] = flights["DEPARTURE_DELAY"].apply(
+    lambda x: (
+        f"-{abs(int(x))//60:02}:{abs(int(x))%60:02}:00"
+        if x < 0
+        else f"{int(x)//60:02}:{int(x)%60:02}:00"
+    ) if pd.notnull(x) else None
+)
+
+def delay_bucket(x):
+    if pd.isna(x):
+        return "Unknown"
+    elif x <= 0:
+        return "On Time / Early"
+    elif x <= 15:
+        return "Minor Delay"
+    elif x <= 60:
+        return "Moderate Delay"
+    else:
+        return "Major Delay"
+
+flights["DEP_DELAY_BUCKET"] = flights["DEPARTURE_DELAY"].apply(delay_bucket)
+
+flights
+
+flights['DEPARTURE_DELAY'].isnull().sum()
+
+flights['DEPARTURE_DELAY_FORMATTED'].isnull().sum()
+
+flights.loc[flights['DEPARTURE_TIME']==0,
+            ['DEPARTURE_DELAY']].isnull().sum()
+
+flights.loc[flights['DEPARTURE_TIME']==0,
+            ['DEPARTURE_DELAY']]= 0
+
+flights['CANCELLED'].isnull().sum()
+
+flights['CANCELLED'].value_counts()
+
+flights.loc[flights['CANCELLED']== 1,
+ ['ARRIVAL_TIME']].isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1,
+ ['ARRIVAL_TIME']].isnull().sum()
+
+flights['ARRIVAL_TIME'].value_counts()
+
+flights['ARRIVAL_TIME']=flights['ARRIVAL_TIME'].replace(0.0,np.nan)
+
+flights['ARRIVAL_TIME'].isnull().sum()
+
+flights["ARRIVED_TIME"] = pd.to_datetime(
+    flights["ARRIVAL_TIME"]
+    .replace(2400, 0)      # handle midnight edge case
+    .fillna(0)             # handle NaN
+    .astype(int)
+    .astype(str)
+    .str.zfill(4),
+    format="%H%M",
+    errors="coerce"
+).dt.time
+
+flights['ARRIVAL_TIME'].isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1,
+['ARRIVAL_TIME']].isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1,
+['ARRIVAL_TIME']] = 0
+
+flights['ARRIVAL_TIME'].isnull().sum()
+
+flights.loc[flights['DIVERTED' ] == 1,
+['ARRIVAL_TIME']] = 0
+
+flights['ARRIVAL_TIME'].isnull().sum()
+
+flights['ARRIVAL_DELAY'].isnull().sum()
+
+flights.loc[flights['CANCELLED'] == 1,
+            ['ARRIVAL_DELAY']].isnull().sum()
+
+flights["ARR_DELAY_FORMATTED"] = flights["ARRIVAL_DELAY"].apply(
+    lambda x: (
+        f"-{abs(int(x))//60:02}:{abs(int(x))%60:02}:00"
+        if x < 0
+        else f"{int(x)//60:02}:{int(x)%60:02}:00"
+    ) if pd.notnull(x) else None
+)
+
+def arr_delay_bucket(x):
+    if pd.isna(x):
+        return "Unknown"
+    elif x <= 0:
+        return "On Time / Early"
+    elif x <= 15:
+        return "Minor Delay"
+    elif x <= 60:
+        return "Moderate Delay"
+    else:
+        return "Major Delay"
+
+flights["ARR_DELAY_BUCKET"] = flights["ARRIVAL_DELAY"].apply(arr_delay_bucket)
+
+flights.loc[flights['CANCELLED'] == 1,
+            ['ARRIVAL_DELAY']]=0
+
+flights
+
+flights.isnull().sum()
+
+flights.loc[flights['CANCELLED'] == 1,
+            ['WHEELS_OFF']].isnull().sum()
+
+flights.loc[flights['CANCELLED'] == 1,
+            ['WHEELS_OFF']]=0
+
+flights.loc[flights['CANCELLED'] == 1,
+            ['TAXI_OUT']].isnull().sum()
+
+flights.loc[flights['CANCELLED'] == 1,
+            ['TAXI_OUT']]=0
+
+flights.loc[flights['CANCELLED']== 1,
+            ['WHEELS_ON']].isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1,
+            ['WHEELS_ON']]=0
+
+flights.loc[flights['CANCELLED']== 1,
+            ['TAXI_IN']].isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1,
+            ['TAXI_IN']]=0
+
+flights.loc[flights['CANCELLED']== 1,
+            ['ELAPSED_TIME']].isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1,
+            ['ELAPSED_TIME']]=0
+
+flights.loc[flights['CANCELLED']== 1,
+            ['AIR_TIME']].isnull().sum()
+
+flights.loc[flights['CANCELLED']== 1,
+            ['AIR_TIME']]=0
+
+flights.isnull().sum()
+
+flights.loc[flights['TAIL_NUMBER']== 'unknown',
+            ['AIR_TIME']]=0
+
+flights.loc[flights['DIVERTED']== 1,
+            ['ELAPSED_TIME']].isnull().sum()
+
+flights.loc[flights['DIVERTED']== 1,
+            ['AIR_TIME']].isnull().sum()
+
+flights.loc[flights['DIVERTED']== 1,
+            ['ELAPSED_TIME']]=0
+
+flights.loc[flights['DIVERTED']== 1,
+            ['AIR_TIME']]=0
+
+flights.isnull().sum()
+
+flights.loc[flights['DIVERTED']==1,
+            ['WHEELS_ON']].isnull().sum()
+
+flights.loc[flights['DIVERTED']==1,
+            ['TAXI_IN']].isnull().sum()
+
+flights.loc[flights['DIVERTED']==1,
+            ['TAXI_IN']]=0
+
+flights.loc[flights['DIVERTED']==1,
+            ['WHEELS_ON']]=0
+
+flights.isnull().sum()
+
+flights.loc[flights['DIVERTED']==1,
+            ['ARRIVAL_DELAY']].isnull().sum()
+
+flights.loc[flights['DIVERTED']==1,
+            ['ARRIVAL_DELAY']]=0
+
+flights.loc[flights['DEPARTURE_TIME'] ==0,
+            ['DEPARTURE_DELAY_FORMATTED']].isnull().sum()
+
+flights.loc[flights['DEPARTURE_TIME'] ==0,
+            ['DEPARTURE_DELAY_FORMATTED']] =0
+
+flights.loc[flights['DEPARTURE_TIME'] ==0,
+            ['DEP_DELAY_FORMATTED']] =0
+
+flights.isnull().sum()
+
+flights.loc[flights['DEPARTURE_TIME'] ==0,
+            ['ARR_DELAY_FORMATTED']] =0
+
+flights.loc[flights['DIVERTED'] ==1,
+            ['ARR_DELAY_FORMATTED']].isnull().sum()
+
+flights.loc[flights['DIVERTED'] ==1,
+            ['ARR_DELAY_FORMATTED']]=0
+
+reason_map = {
+    "A": "AIR_SYSTEM_DELAY",
+    "B": "SECURITY_DELAY",
+    "C": "AIRLINE_DELAY",
+    "D": "LATE_AIRCRAFT_DELAY"
+}
+
+flights["CANCELLATION_REASON_FULL"] = flights["CANCELLATION_REASON"].map(reason_map)
+
+flights.isnull().sum()
+
+flights.loc[flights['CANCELLED']==0,
+            ['CANCELLATION_REASON']].isnull().sum()
+
+flights.loc[flights['CANCELLED']==0,
+            ['CANCELLATION_REASON']]='not_cancelled'
+
+flights.loc[flights['CANCELLED']== 0,
+            ['CANCELLATION_REASON_FULL']]='NOT_CANCELLED'
+
+flights.isnull().sum()
+
+flights['CANCELLATION_REASON_FULL'].isnull().sum()
+
+flights['CANCELLATION_REASON'].isnull().sum()
+
+flights=flights.drop(['WEATHER_DELAY','LATE_AIRCRAFT_DELAY','AIRLINE_DELAY','SECURITY_DELAY','AIR_SYSTEM_DELAY'],axis=1)
+
+flights
+
+flights.isnull().sum()
+
+"""WEEK  3 & 4"""
+
+sns.countplot(x="MONTH", data=flights)
+plt.title("Flight Distribution by Month")
+plt.show()
+
+sns.countplot(x="DAY_OF_WEEK", data=flights, color="red")
+plt.title("Flights by Day of Week")
+plt.show()
+
+flights["DATE"].value_counts().head(5).plot(kind="bar")
+plt.title("Top 5 Busiest Dates")
+plt.ylabel("Flights")
+plt.show()
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(10,4))
+sns.countplot(y="AIRLINE", data=flights, order=flights["AIRLINE"].value_counts().index[:10],color='blue')
+plt.title("Top Airlines by Flights Count")
+plt.show()
+
+sns.countplot(y="ORIGIN_AIRPORT", data=flights,
+              order=flights["ORIGIN_AIRPORT"].value_counts().index[:10])
+plt.title("Top 10 Origin Airports")
+plt.show()
+
+delay_airline = flights.groupby("AIRLINE")["DEPARTURE_DELAY"].mean().sort_values(ascending=False)
+
+delay_airline.head(10).plot(kind="bar")
+plt.title("Average Departure Delay by Airline")
+plt.show()
+
+flights["DEP_HOUR"] = flights["DEPARTURE_TIME"].fillna(0).astype(int)//100
+
+flights["ROUTE"] = flights["ORIGIN_AIRPORT"].astype(str) + " → " + flights["DESTINATION_AIRPORT"].astype(str)
+
+sns.countplot(y="CANCELLATION_REASON_FULL", data=flights)
+plt.title("Cancellation Reasons")
+plt.show()
+
+flights['CANCELLED'].value_counts()
+
+flights['CANCELLATION_REASON_FULL'].value_counts()
+
+route_delay = flights.groupby("ROUTE")["DEPARTURE_DELAY"].mean().sort_values(ascending=False)
+
+route_delay.head(10).plot(kind="line")
+plt.title("Most Delaying Routes")
+plt.show()
+
+"""week 5 and 6
+
+
+"""
+
+flights["ROUTE"] = flights["ORIGIN_AIRPORT"].astype(str) + "-" + flights["DESTINATION_AIRPORT"].astype(str)
+
+top_routes = flights["ROUTE"].value_counts().head(10)
+
+plt.figure(figsize=(10,5))
+top_routes.plot(kind="bar", color="teal")
+
+plt.title("Top 10 Origin-Destination Routes")
+plt.xlabel("Route")
+plt.ylabel("Number of Flights")
+plt.show()
+
+delay_heatmap = flights.pivot_table(
+    values="DEPARTURE_DELAY",
+    index="AIRLINE",
+    columns="ORIGIN_AIRPORT",
+    aggfunc="mean"
+)
+
+plt.figure(figsize=(12,6))
+sns.heatmap(delay_heatmap, cmap="coolwarm")
+
+plt.title("Average Delay Heatmap by Airline and Airport")
+plt.show()
+
+"""Some airports cause delays across multiple airlines
+
+"""
+
+airport_month_delay = flights.pivot_table(
+    values="DEPARTURE_DELAY",
+    index="ORIGIN_AIRPORT",
+    columns="MONTH",
+    aggfunc="mean"
+)
+
+top_airports = flights["ORIGIN_AIRPORT"].value_counts().head(10).index
+
+sns.heatmap(airport_month_delay.loc[top_airports], cmap="coolwarm")
+
+airport_month_delay = airport_month_delay.fillna(0)
+plt.title("Airport Delay Heatmap by Month")
+plt.show()
+
+cancel_month = flights.groupby("MONTH")["CANCELLED"].sum()
+
+cancel_month.plot(kind="line", marker="o", color="red")
+
+plt.title("Monthly Flight Cancellations")
+plt.ylabel("Number of Cancelled Flights")
+plt.show()
+
+cancel_reason_month = flights.pivot_table(
+    index="MONTH",
+    columns="CANCELLATION_REASON_FULL",
+    values="CANCELLED",
+    aggfunc="sum"
+)
+
+sns.heatmap(cancel_reason_month, cmap="Reds")
+
+plt.title("Cancellation Reasons by Month")
+plt.show()
+
+winter = flights[flights["MONTH"].isin([12,1,2])]
+
+sns.barplot(x="MONTH", y="DEPARTURE_DELAY", data=winter, color="orange")
+
+plt.title("Average Delay During Winter Months")
+plt.show()
+
+route_delay = flights.pivot_table(
+    values="DEPARTURE_DELAY",
+    index="ROUTE",
+    columns="MONTH",
+    aggfunc="mean"
+)
+
+top_routes = flights["ROUTE"].value_counts().head(10).index
+
+plt.figure(figsize=(12,6))
+
+sns.heatmap(
+    route_delay.loc[top_routes],
+    cmap="coolwarm",
+    center=0
+)
+
+plt.title("Route Delay Heatmap by Month")
+
+plt.show()
+
+import folium
+
+airport_delay = flights.groupby("ORIGIN_AIRPORT")["DEPARTURE_DELAY"].mean().reset_index()
+
+airport_map = flights.merge(
+    airport_delay,
+    left_on="AIRPORT",
+    right_on="ORIGIN_AIRPORT"
+)
+
+delay_map = folium.Map(location=[39,-98], zoom_start=4)
+
+for _, row in airport_map.iterrows():
+
+    color = "red" if row["DEPARTURE_DELAY"] > 10 else "green"
+
+    folium.CircleMarker(
+        location=[row["LATITUDE"], row["LONGITUDE"]],
+        radius=5,
+        popup=f"{row['AIRPORT']} Delay: {row['DEPARTURE_DELAY']:.2f}",
+        color=color,
+        fill=True
+    ).add_to(delay_map)
+
+delay_map
+
