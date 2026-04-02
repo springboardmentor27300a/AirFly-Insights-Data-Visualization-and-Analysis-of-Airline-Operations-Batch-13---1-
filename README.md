@@ -1,9 +1,9 @@
-#AirFly Insights: Airline Data Analysis Dashboard
+# AirFly Insights
 
 AirFly Insights is a data analysis project that focuses on understanding airline operations, delays, routes, and cancellations using data visualization techniques. The project combines Python-based exploratory data analysis with an interactive Power BI dashboard to present meaningful insights from airline data.
 The goal of this project is to identify patterns in airline performance and provide a clear visual understanding of operational trends.
 
-##Project Overview
+## Project Overview
 
 This project analyzes airline flight data to explore:
 Flight activity across airlines and airports
@@ -13,7 +13,7 @@ Airport-level traffic distribution
 Cancellation trends and contributing factors
 The final outcome of the project is an interactive dashboard that presents these insights in a structured and visually understandable format.
 
-##Key Features
+## Key Features
 Analysis of flight operations across multiple airlines
 Identification of delay patterns by hour, airport, and cause
 Route-level analysis to determine busiest travel connections
@@ -21,7 +21,7 @@ Cancellation analysis to understand operational disruptions
 Interactive dashboard for easy interpretation of results
 Geographical visualization of airport traffic distribution
 
-##Tools and Technologies Used
+## Tools and Technologies Used
 
 Python:
 Pandas for data handling and preprocessing
@@ -33,7 +33,7 @@ Dashboard creation
 Interactive filtering and visualization
 KPI indicators and geographical mapping
 
-##Dataset
+## Dataset
 The dataset used in this project contains airline flight information including:
 Airline codes
 Origin and destination airports
@@ -43,7 +43,7 @@ Flight schedule information
 Route information
 The dataset contains approximately 5.8 million records, providing sufficient data to analyze patterns and trends in airline operations.
 
-##Dashboard Components
+## Dashboard Components
 Airline Performance Overview
 Total flights and airlines
 Average arrival and departure delays
@@ -60,11 +60,11 @@ Route congestion vs delay relationship
 Geographical map of airport traffic
 Cancellation reasons analysis
 
-##Project Outcome
+## Project Outcome
 The project demonstrates how data visualization can transform raw flight data into meaningful insights. The dashboard helps identify key operational patterns such as peak delay hours, busiest routes, and major factors affecting flight performance.
 
 This project can be useful for understanding airline efficiency and identifying areas for operational improvement.
 
-##Author
+## Author
 
 Thutakura Kundana
