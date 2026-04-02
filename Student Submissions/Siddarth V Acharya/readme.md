@@ -11,7 +11,7 @@
 
 ---
 
-## ✈️ Project Overviewrmdir /s /q .git
+## ✈️ Project Overview
 
 **AirFly Insights** is a high-scale data analytics project focused on uncovering operational inefficiencies, delay propagation patterns, and cancellation drivers in the aviation ecosystem.
 
