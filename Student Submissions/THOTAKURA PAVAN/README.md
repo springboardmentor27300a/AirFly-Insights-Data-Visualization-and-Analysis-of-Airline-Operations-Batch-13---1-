@@ -1,17 +1,17 @@
-Airline Delay Analysis Dashboard
+## Airline Delay Analysis Dashboard
 
-Project Overview
+# Project Overview
 
 The Airline Delay Analysis project aims to analyze flight operations data to identify delay patterns, cancellation trends, and airline performance. The project follows a structured data analytics workflow including data collection, cleaning, analysis, and dashboard visualization using Microsoft Power BI.
 
-Milestone 1 – Understanding the Problem & Data Collection
+# Milestone 1 – Understanding the Problem & Data Collection
 
 - Defined the objective to analyze airline delays and cancellations
 - Collected flight dataset containing airline, delay, and route information
 - Explored dataset structure and identified key attributes
 - Selected relevant fields for analysis
 
-Milestone 2 – Data Cleaning & Preparation
+# Milestone 2 – Data Cleaning & Preparation
 
 - Handled missing and null values
 - Removed irrelevant columns
@@ -20,7 +20,7 @@ Milestone 2 – Data Cleaning & Preparation
 - Created cleaned dataset for analysis
 - Ensured data consistency and accuracy
 
-Milestone 3 – Exploratory Data Analysis
+# Milestone 3 – Exploratory Data Analysis
 
 - Calculated total number of flights
 - Computed average arrival and departure delays
@@ -29,7 +29,7 @@ Milestone 3 – Exploratory Data Analysis
 - Examined cancellation distribution
 - Identified busiest routes
 
-Milestone 4 – Dashboard Development in Power BI
+# Milestone 4 – Dashboard Development in Power BI
 
 - Imported cleaned dataset into Power BI
 - Created KPI cards for key metrics
@@ -40,11 +40,11 @@ Milestone 4 – Dashboard Development in Power BI
 - Added slicers for airline and month filtering
 - Applied formatting for better dashboard layout
 
-Final Outcome
+# Final Outcome
 
 The project resulted in an interactive dashboard that provides meaningful insights into airline performance. The dashboard enables users to explore delays, cancellations, and traffic trends dynamically. This project demonstrates practical skills in data cleaning, analysis, and visualization using Power BI.
 
-Skills Demonstrated
+# Skills Demonstrated
 
 - Data Cleaning
 - Data Analysis
