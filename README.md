@@ -1,6 +1,7 @@
 # AirFly Insights
 
 AirFly Insights is a data analysis project that focuses on understanding airline operations, delays, routes, and cancellations using data visualization techniques. The project combines Python-based exploratory data analysis with an interactive Power BI dashboard to present meaningful insights from airline data.
+
 The goal of this project is to identify patterns in airline performance and provide a clear visual understanding of operational trends.
 
 ## Project Overview
