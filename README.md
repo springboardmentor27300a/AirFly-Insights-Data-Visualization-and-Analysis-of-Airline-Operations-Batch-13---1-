@@ -47,7 +47,7 @@ The dataset contains large-scale airline flight records .
 In this project, I performed; Airline-wise delay analysis, Monthly delay trends, Top airports analysis,
 Route-level delay comparison, Correlation heatmap, Distance vs delay analysis, Flight status distribution .
 
-## Dashboard - https://drive.google.com/file/d/1IX_A758Ieg8s5A0MdmHkhP89R-Ok3oNx/view?usp=drive_link
+## Dashboard - https://app.powerbi.com/links/iGMHGeV-me?ctid=b89b940f-0b5a-4337-9811-1ccefca02569&pbi_source=linkShare
 
 ## Author
 Ritesh Kumar Ranjan
